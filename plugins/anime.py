@@ -37,7 +37,7 @@ def search_anime(query):
 
 # Cool font style for the anime title
 def style_anime_title(title):
-    return f"**{title}**".replace("A", "𝔸").replace("B", "𝔹").replace("C", "ℂ").replace("D", "𝔻").replace("E", "𝔼").replace("F", "𝔽").replace("G", "𝔾").replace("H", "ℍ").replace("I", "𝕀").replace("J", "𝕁").replace("K", "𝕂").replace("L", "𝕃").replace("M", "𝕄").replace("N", "ℕ").replace("O", "𝕆").replace("P", "ℙ").replace("Q", "ℚ").replace("R", "ℝ").replace("S", "𝕊").replace("T", "𝕋").replace("U", "𝕌").replace("V", "𝕍").replace("W", "𝕎").replace("X", "𝕏").replace("Y", "𝕐").replace("Z", "ℤ")
+    return f"**{title}**".replace("A", "ᴀ").replace("B", "ʙ").replace("C", "ᴄ").replace("D", "ᴅ").replace("E", "ᴇ").replace("F", "ғ").replace("G", "ɢ").replace("H", "ʜ").replace("I", "ɪ").replace("J", "ᴊ").replace("K", "ᴋ").replace("L", "ʟ").replace("M", "ᴍ").replace("N", "ɴ").replace("O", "ᴏ").replace("P", "ᴘ").replace("Q", "ǫ").replace("R", "ʀ").replace("S", "s").replace("T", "ᴛ").replace("U", "ᴜ").replace("V", "ᴠ").replace("W", "ᴡ").replace("X", "x").replace("Y", "ʏ").replace("Z", "ᴢ")
 
 # Get an emoji based on the anime title
 def get_anime_emoji(title):
@@ -55,11 +55,11 @@ async def top_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in top_anime_list[:10]]
-        keyboard.append([InlineKeyboardButton("✖️✨ 𝕮𝖑𝖔𝖘𝖊 ✨✖️", callback_data='close')])
+        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
-            "✨ *Top Anime* ✨",
+            "✨ **Top Anime** ✨",
             reply_markup=reply_markup,
             parse_mode=ParseMode.MARKDOWN
         )
@@ -77,7 +77,7 @@ async def weekly_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in weekly_anime_list[:10]]
-        keyboard.append([InlineKeyboardButton("✖️✨ 𝕮𝖑𝖔𝖘𝖊 ✨✖️", callback_data='close')])
+        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
@@ -104,11 +104,11 @@ async def search_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{get_anime_emoji(anime.get('title'))} {anime.get('title')}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in search_results[:10]]
-        keyboard.append([InlineKeyboardButton("✖️✨ 𝕮𝖑𝖔𝖘𝖊 ✨✖️", callback_data='close')])
+        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
-            f"🔍 *Search Results for '{query}'* 🔍",
+            f"🔍 **Search Results for '{query}'** 🔍",
             reply_markup=reply_markup,
             parse_mode=ParseMode.MARKDOWN
         )
@@ -136,7 +136,7 @@ async def callback_query_handler(client: Client, callback_query: CallbackQuery):
             await callback_query.message.edit_text(
                 details,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("✖️✨ 𝕮𝖑𝖔𝖘𝖊 ✨✖️", callback_data='close')]]
+                    [[InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')]]
                 ),
                 parse_mode=ParseMode.MARKDOWN
             )
