@@ -221,7 +221,7 @@ async def start_command(client: Client, message: Message):
                     [InlineKeyboardButton("• ғᴏʀ ᴍᴏʀᴇ •", url='https://t.me/Pythonbotz')],
                     [InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data='about'),
                      InlineKeyboardButton('sᴇᴛᴛɪɴɢs •', callback_data='setting')],
-                    [InlineKeyboardButton("• ᴏᴜʀ ᴄᴏᴍᴍᴜɴɪᴛʏ •", url='https://t.me/AniHorizon/53')],
+                    [InlineKeyboardButton("• ᴏᴜʀ ᴄᴏᴍᴍᴜɴɪᴛʏ •", url='https://t.me/Hatexfree')],
                 ])
         await message.reply_photo(
             photo = random.choice(PICS),
