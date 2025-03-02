@@ -982,30 +982,3 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
         else:
             await query.message.reply("Failed to disable the shortener. Please try again.")
-    # Callback handler for detail and close button
-@Bot.on_callback_query()
-async def callback_query_handler(client: Client, callback_query: CallbackQuery):
-    elif callback_query.data.startswith("detail_"):
-        mal_id = callback_query.data.split("_")[1]
-        url = f"https://api.jikan.moe/v4/anime/{mal_id}"
-        data = fetch_anime_data(url)
-
-        elif data:
-            anime = data.get("data", {})
-            details = (
-                f"**Title:** {style_anime_title(anime.get('title'))}\n"
-                f"**Type:** {anime.get('type')}\n"
-                f"**Episodes:** {anime.get('episodes')}\n"
-                f"**Score:** {anime.get('score')}\n"
-                f"**Synopsis:** {anime.get('synopsis')}\n"
-                f"**URL:** [MyAnimeList]({anime.get('url')})"
-            )
-            await callback_query.message.edit_text(
-                details,
-                reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("✖️✨ 𝕮𝖑𝖔𝖘𝖊 ✨✖️", callback_data='close')]]
-                ),
-                parse_mode=ParseMode.MARKDOWN
-            )
-    elif callback_query.data == 'close':
-        await callback_query.message.delete()
