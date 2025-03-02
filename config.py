@@ -7,7 +7,7 @@ from logging.handlers import RotatingFileHandler
 
 
 #Bot token @Botfather, --⚠️ REQUIRED--
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8035145553:AAEX1fBlN1gK_NSDjsULYkTa77iorn9_1To")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "7553151054:AAGcFIrlUOCNnA31V0oLiyYEMIkqet-re6M")
 #Your API ID from my.telegram.org --⚠️ REQUIRED--
 APP_ID = int(os.environ.get("APP_ID", "24371796"))
 
@@ -15,7 +15,7 @@ APP_ID = int(os.environ.get("APP_ID", "24371796"))
 API_HASH = os.environ.get("API_HASH", "8121c78f4b8b31e88cc2623d1277338d")
 
 #Your db channel Id --⚠️ REQUIRED--
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002449249482"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002383945264"))
 
 #OWNER ID --⚠️ REQUIRED--
 OWNER_ID = int(os.environ.get("OWNER_ID", "6076683960"))
@@ -28,7 +28,7 @@ PORT = os.environ.get("PORT", "8080")
 
 #Database --⚠️ REQUIRED--
 DB_URL = os.environ.get("DB_URL", "mongodb+srv://hamzann:hamza00@cluster0.id2lo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = os.environ.get("DATABASE_NAME", "Shinob_anime_Bot")
+DB_NAME = os.environ.get("DATABASE_NAME", "pyfs_Bot")
 
 VERIFY_DB = os.environ.get("VERIFY_DB", "mongodb+srv://sanjisama626:sanjisama626@sanjisama.lukxw8r.mongodb.net/?retryWrites=true&w=majority")
 
