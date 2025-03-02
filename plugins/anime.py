@@ -1,6 +1,9 @@
 # Use Your Own Api In This or Face thousand's of error
+# if remove our credits then you are certified Gay 🏳️‍🌈
 
-# Created By AniShin (@iTz_Anayokoji)
+
+# Created By AniShin × Ben 10  (@PythonBotz)
+
 import os
 import requests
 from pyrogram import Client, filters
