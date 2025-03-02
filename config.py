@@ -47,8 +47,7 @@ FORCE_PIC = os.environ.get("FORCE_PIC", "https://telegra.ph/file/e292b12890b8b4b
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 
 #Collection of pics for Bot // #Optional but atleast one pic link should be replaced if you don't want predefined links
-PICS = (os.environ.get("PICS", "https://envs.sh/H27.jpg https://envs.sh/gW4.jpg https://telegra.ph/file/e292b12890b8b4b9dcbd1.jpg")).split() #Required
-
+PICS = (os.environ.get("PICS", "https://envs.sh/H27.jpg https://envs.sh/gW4.jpg https://telegra.ph/file/e292b12890b8b4b9dcbd1.jpg https://envs.sh/H21.jpg https://envs.sh/HMj.jpg https://envs.sh/arr.jpg https://envs.sh/arH.jpg https://envs.sh/Ye.jpg https://envs.sh/EM8.jpg https://envs.sh/_0j.jpg https://envs.sh/_0B.jpg")).split() #Required
 #set your Custom Caption here, Keep None for Disable Custom Caption
 CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", None)
 
