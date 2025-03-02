@@ -58,7 +58,9 @@ async def top_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in top_anime_list[:10]]
-        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        keyboard.append( [InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
@@ -80,7 +82,9 @@ async def weekly_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in weekly_anime_list[:10]]
-        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        keyboard.append([InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
@@ -107,7 +111,9 @@ async def search_anime_command(client: Client, message: Message):
 
         keyboard = [[InlineKeyboardButton(f"{get_anime_emoji(anime.get('title'))} {anime.get('title')}", callback_data=f'detail_{anime.get("mal_id")}')] 
                     for anime in search_results[:10]]
-        keyboard.append([InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        keyboard.append([InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
