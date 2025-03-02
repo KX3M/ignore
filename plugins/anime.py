@@ -37,7 +37,7 @@ def search_anime(query):
 
 # Cool font style for the anime title
 def style_anime_title(title):
-    return f"**{title}**".replace("A", "ᴀ").replace("B", "ʙ").replace("C", "ᴄ").replace("D", "ᴅ").replace("E", "ᴇ").replace("F", "ғ").replace("G", "ɢ").replace("H", "ʜ").replace("I", "ɪ").replace("J", "ᴊ").replace("K", "ᴋ").replace("L", "ʟ").replace("M", "ᴍ").replace("N", "ɴ").replace("O", "ᴏ").replace("P", "ᴘ").replace("Q", "ǫ").replace("R", "ʀ").replace("S", "s").replace("T", "ᴛ").replace("U", "ᴜ").replace("V", "ᴠ").replace("W", "ᴡ").replace("X", "x").replace("Y", "ʏ").replace("Z", "ᴢ")
+    return f"{title}".replace("A", "ᴀ").replace("B", "ʙ").replace("C", "ᴄ").replace("D", "ᴅ").replace("E", "ᴇ").replace("F", "ғ").replace("G", "ɢ").replace("H", "ʜ").replace("I", "ɪ").replace("J", "ᴊ").replace("K", "ᴋ").replace("L", "ʟ").replace("M", "ᴍ").replace("N", "ɴ").replace("O", "ᴏ").replace("P", "ᴘ").replace("Q", "ǫ").replace("R", "ʀ").replace("S", "s").replace("T", "ᴛ").replace("U", "ᴜ").replace("V", "ᴠ").replace("W", "ᴡ").replace("X", "x").replace("Y", "ʏ").replace("Z", "ᴢ")
 
 # Get an emoji based on the anime title
 def get_anime_emoji(title):
@@ -81,7 +81,7 @@ async def weekly_anime_command(client: Client, message: Message):
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await message.reply_text(
-            "📅 *Weekly Anime* 📅",
+            "📅 **Weekly Anime** 📅",
             reply_markup=reply_markup,
             parse_mode=ParseMode.MARKDOWN
         )
@@ -131,7 +131,7 @@ async def callback_query_handler(client: Client, callback_query: CallbackQuery):
                 f"**Episodes:** {anime.get('episodes')}\n"
                 f"**Score:** {anime.get('score')}\n"
                 f"**Synopsis:** {anime.get('synopsis')}\n"
-                f"**URL:** [MyAnimeList]({anime.get('url')})"
+                f"**URL:** [MyAnimeList × PythonBotz]({anime.get('url')})"
             )
             await callback_query.message.edit_text(
                 details,
