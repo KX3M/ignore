@@ -4,7 +4,7 @@
 import os
 import requests
 from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram.enums import ParseMode
 from bot import Bot
 
@@ -115,7 +115,7 @@ async def search_anime_command(client: Client, message: Message):
     except Exception as e:
         await message.reply(f"An error occurred: {str(e)}")
 
-# Callback handler for detail and close buttons 
+# Callback handler for detail and close buttons
 @Bot.on_callback_query()
 async def callback_query_handler(client: Client, callback_query: CallbackQuery):
     if callback_query.data.startswith("detail_"):
@@ -125,25 +125,21 @@ async def callback_query_handler(client: Client, callback_query: CallbackQuery):
 
         if data:
             anime = data.get("data", {})
-            image_url = anime.get("images", {}).get("jpg", {}).get("image_url", "")
             details = (
                 f"**Title:** {style_anime_title(anime.get('title'))}\n"
                 f"**Type:** {anime.get('type')}\n"
                 f"**Episodes:** {anime.get('episodes')}\n"
                 f"**Score:** {anime.get('score')}\n"
-                f"**Synopsis:** {anime.get('synopsis')[:500]}...\n\n"
-                f"**[MyAnimeList × PythonBotz]({anime.get('url')})**"
+                f"**Synopsis:** {anime.get('synopsis')}\n"
+                f"**URL:** [MyAnimeList]({anime.get('url')})\n"
+                "```Join : @illegalcollage```"
             )
-
-            await callback_query.message.edit_media(
-                InputMediaPhoto(
-                    media=image_url,
-                    caption=details,
-                    parse_mode=ParseMode.MARKDOWN
-                ),
+            await callback_query.message.edit_text(
+                details,
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')]]
-                )
+                ),
+                parse_mode=ParseMode.MARKDOWN
             )
     elif callback_query.data == 'close':
         await callback_query.message.delete()
