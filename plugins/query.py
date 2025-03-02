@@ -107,12 +107,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                             )
             ),
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('• Bᴀᴄᴋ', callback_data='start'), InlineKeyboardButton('Cʟᴏsᴇ •', callback_data='close')]
+                [InlineKeyboardButton('• Bᴀᴄᴋ', callback_data='start'), InlineKeyboardButton('Sᴇᴛᴛɪɴɢs •', callback_data='setting')]
             ]),
         )
 
     elif data == "setting":
-        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), "<b>Pʟᴇᴀsᴇ wᴀɪᴛ !\n\n<i>🔄 Rᴇᴛʀɪᴇᴠɪɴɢ ᴀʟʟ Sᴇᴛᴛɪɴɢs...</i></b>"))
+        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), "<b>Pʟᴇᴀsᴇ wᴀɪᴛ !\n\n<i>🔄 Rᴇᴛʀɪᴇᴠɪɴɢ ᴀʟʟ Sᴇᴛᴛɪɴɢs...</i>\n🦄 By : @metaui</b>"))
         try:
             total_fsub = len(await db.get_all_channels())
             total_admin = len(await db.get_all_admins())
