@@ -7,7 +7,7 @@ from bot import Bot
 from pyrogram import __version__
 from plugins.FORMATS import *
 from config import *
-from pyrogram.enums import ChatAction
+from pyrogram.enums import ParseMode, ChatAction
 from plugins.autoDelete import convert_time
 from database.database import db
 from datetime import timedelta
