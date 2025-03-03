@@ -46,8 +46,45 @@ async def fileSettings(getfunc, setfunc=None, delfunc=False):
         print(
             f"Error occured at [fileSettings(getfunc, setfunc=None, delfunc=False)] : {e}")
 
-# Provide or Make Button by takiing required modes and data
 
+#Function to fetch anime data from the API
+def fetch_anime_data(api_url):
+    response = requests.get(api_url)
+    response.raise_for_status()
+    return response.json()
+
+# Function to get top anime
+def get_top_anime():
+    url = "https://api.jikan.moe/v4/top/anime"
+    data = fetch_anime_data(url)
+    top_anime_list = data.get("data", [])
+    return top_anime_list
+
+# Function to get weekly anime
+def get_weekly_anime():
+    url = "https://api.jikan.moe/v4/seasons/now"
+    data = fetch_anime_data(url)
+    weekly_anime_list = data.get("data", [])
+    return weekly_anime_list
+
+# Function to search for anime
+def search_anime(query):
+    url = f"https://api.jikan.moe/v4/anime?q={query}&page=1"
+    data = fetch_anime_data(url)
+    search_results = data.get("data", [])
+    return search_results
+
+# Cool font style for the anime title
+def style_anime_title(title):
+    return f"{title}".replace("A", "ᴀ").replace("B", "ʙ").replace("C", "ᴄ").replace("D", "ᴅ").replace("E", "ᴇ").replace("F", "ғ").replace("G", "ɢ").replace("H", "ʜ").replace("I", "ɪ").replace("J", "ᴊ").replace("K", "ᴋ").replace("L", "ʟ").replace("M", "ᴍ").replace("N", "ɴ").replace("O", "ᴏ").replace("P", "ᴘ").replace("Q", "ǫ").replace("R", "ʀ").replace("S", "s").replace("T", "ᴛ").replace("U", "ᴜ").replace("V", "ᴠ").replace("W", "ᴡ").replace("X", "x").replace("Y", "ʏ").replace("Z", "ᴢ")
+
+# Get an emoji based on the anime title
+def get_anime_emoji(title):
+    emojis = ["✨", "🌟", "💫", "🔥", "💥", "🌸", "🎉", "🎇", "🎆", "⚡"]
+    return emojis[hash(title) % len(emojis)]
+
+
+# Provide or Make Button by takiing required modes and data
 
 def buttonStatus(pc_data: str, hc_data: str, cb_data: str) -> list:
     button = [
@@ -986,26 +1023,27 @@ async def cb_handler(client: Bot, query: CallbackQuery):
 
 
     elif data.startswith("detail_"):
-        mal_id = callback_query.data.split("_")[1]
+        mal_id = data.split("_")[1]
         url = f"https://api.jikan.moe/v4/anime/{mal_id}"
-        data = fetch_anime_data(url)
+        anime_data = await fetch_anime_data(url)
 
-        if data:
-            anime = data.get("data", {})
+        if anime_data and "data" in anime_data:
+            anime = anime_data["data"]
             details = (
                 f"Title: {style_anime_title(anime.get('title'))}\n"
-                f"Type: {anime.get('type')}\n"
-                f"Episodes: {anime.get('episodes')}\n"
-                f"Score: {anime.get('score')}\n"
-                f"Synopsis: {anime.get('synopsis')}\n"
-                f"URL: [MyAnimeList]({anime.get('url')})\n"
-                "```Join : @illegalcollage```"
+                f"Type: {anime.get('type', 'N/A')}\n"
+                f"Episodes: {anime.get('episodes', 'Unknown')}\n"
+                f"Score: {anime.get('score', 'N/A')}\n"
+                f"Synopsis: {anime.get('synopsis', 'No synopsis available.')}\n"
+                f"[MyAnimeList]({anime.get('url', '#')})"
             )
-            await callback_query.message.edit_text(
+
+            await query.message.edit_text(
                 details,
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')]]
                 ),
                 parse_mode=ParseMode.MARKDOWN
             )
-
+        else:
+            await query.answer("Failed to fetch anime details!", show_alert=True)
