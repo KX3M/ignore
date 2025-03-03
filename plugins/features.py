@@ -19,7 +19,7 @@ from plugins.query import *
 @Bot.on_message(filters.command('top') & filters.private)
 async def top_anime_command(client: Client, message: Message):
     try:
-        top_anime_list = get_top_anime()
+        top_anime_list = await get_top_anime()
         if not top_anime_list:
             await message.reply("No top anime found at the moment.")
             return
@@ -45,7 +45,7 @@ async def top_anime_command(client: Client, message: Message):
 @Bot.on_message(filters.command('weekly') & filters.private)
 async def weekly_anime_command(client: Client, message: Message):
     try:
-        weekly_anime_list = get_weekly_anime()
+        weekly_anime_list = await get_weekly_anime()
         if not weekly_anime_list:
             await message.reply("No weekly anime found at the moment.")
             return
@@ -76,7 +76,7 @@ async def search_anime_command(client: Client, message: Message):
         return
 
     try:
-        search_results = search_anime(query)
+        search_results = await search_anime(query)
         if not search_results:
             await message.reply("No anime found for the search query.")
             return
