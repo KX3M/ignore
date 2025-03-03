@@ -2,6 +2,7 @@ import random
 import request 
 import logging
 import asyncio
+import aiohttp 
 from bot import Bot
 from pyrogram import __version__
 from plugins.FORMATS import *
