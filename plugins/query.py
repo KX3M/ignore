@@ -49,32 +49,30 @@ async def fileSettings(getfunc, setfunc=None, delfunc=False):
             f"Error occured at [fileSettings(getfunc, setfunc=None, delfunc=False)] : {e}")
 
 
-#Function to fetch anime data from the API
-def fetch_anime_data(api_url):
-    response = requests.get(api_url)
-    response.raise_for_status()
-    return response.json()
+# Function to fetch anime data asynchronously
+async def fetch_anime_data(api_url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(api_url) as response:
+            response.raise_for_status()
+            return await response.json()
 
-# Function to get top anime
-def get_top_anime():
+# Function to get top anime asynchronously
+async def get_top_anime():
     url = "https://api.jikan.moe/v4/top/anime"
-    data = fetch_anime_data(url)
-    top_anime_list = data.get("data", [])
-    return top_anime_list
+    data = await fetch_anime_data(url)
+    return data.get("data", [])
 
-# Function to get weekly anime
-def get_weekly_anime():
+# Function to get weekly anime asynchronously
+async def get_weekly_anime():
     url = "https://api.jikan.moe/v4/seasons/now"
-    data = fetch_anime_data(url)
-    weekly_anime_list = data.get("data", [])
-    return weekly_anime_list
+    data = await fetch_anime_data(url)
+    return data.get("data", [])
 
-# Function to search for anime
-def search_anime(query):
+# Function to search for anime asynchronously
+async def search_anime(query):
     url = f"https://api.jikan.moe/v4/anime?q={query}&page=1"
-    data = fetch_anime_data(url)
-    search_results = data.get("data", [])
-    return search_results
+    data = await fetch_anime_data(url)
+    return data.get("data", [])
 
 # Cool font style for the anime title
 def style_anime_title(title):
@@ -84,8 +82,6 @@ def style_anime_title(title):
 def get_anime_emoji(title):
     emojis = ["✨", "🌟", "💫", "🔥", "💥", "🌸", "🎉", "🎇", "🎆", "⚡"]
     return emojis[hash(title) % len(emojis)]
-
-
 # Provide or Make Button by takiing required modes and data
 
 def buttonStatus(pc_data: str, hc_data: str, cb_data: str) -> list:
