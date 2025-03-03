@@ -12,6 +12,86 @@ from pyrogram import Client, filters
 from database.database import db 
 from plugins.query import *
 
+
+
+# Handler to display top anime with buttons
+@Bot.on_message(filters.command('top') & filters.private)
+async def top_anime_command(client: Client, message: Message):
+    try:
+        top_anime_list = get_top_anime()
+        if not top_anime_list:
+            await message.reply("No top anime found at the moment.")
+            return
+
+        keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
+                    for anime in top_anime_list[:10]]
+        keyboard.append( [InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        await message.reply_text(
+            "✨ **Top Anime** ✨",
+            reply_markup=reply_markup,
+            parse_mode=ParseMode.MARKDOWN
+        )
+    except Exception as e:
+        await message.reply(f"An error occurred: {str(e)}")
+
+# Handler to display weekly anime with buttons
+@Bot.on_message(filters.command('weekly') & filters.private)
+async def weekly_anime_command(client: Client, message: Message):
+    try:
+        weekly_anime_list = get_weekly_anime()
+        if not weekly_anime_list:
+            await message.reply("No weekly anime found at the moment.")
+            return
+
+        keyboard = [[InlineKeyboardButton(f"{style_anime_title(anime.get('title'))}", callback_data=f'detail_{anime.get("mal_id")}')] 
+                    for anime in weekly_anime_list[:10]]
+        keyboard.append([InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        await message.reply_text(
+            "📅 **Weekly Anime** 📅",
+            reply_markup=reply_markup,
+            parse_mode=ParseMode.MARKDOWN
+        )
+    except Exception as e:
+        await message.reply(f"An error occurred: {str(e)}")
+
+# Handler to search for anime with buttons
+@Bot.on_message(filters.command('search') & filters.private)
+async def search_anime_command(client: Client, message: Message):
+    query = " ".join(message.text.split()[1:])
+    if not query:
+        await message.reply("Please provide a search query.")
+        return
+
+    try:
+        search_results = search_anime(query)
+        if not search_results:
+            await message.reply("No anime found for the search query.")
+            return
+
+        keyboard = [[InlineKeyboardButton(f"{get_anime_emoji(anime.get('title'))} {anime.get('title')}", callback_data=f'detail_{anime.get("mal_id")}')] 
+                    for anime in search_results[:10]]
+        keyboard.append([InlineKeyboardButton("• ғᴏʀ ", url ='t.me/Pythonbotz'),
+                          InlineKeyboardButton(" ᴍᴏʀᴇ •", url ='t.me/pythonbotz')],
+            [InlineKeyboardButton("🦄 ᴄʟᴏsᴇ !!", callback_data='close')])
+        reply_markup = InlineKeyboardMarkup(keyboard)
+
+        await message.reply_text(
+            f"🔍 **Search Results for '{query}'** 🔍",
+            reply_markup=reply_markup,
+            parse_mode=ParseMode.MARKDOWN
+        )
+    except Exception as e:
+        await message.reply(f"An error occurred: {str(e)}")
+
+
 @Bot.on_message(filters.command('add_fsub') & filters.private & filters.user(OWNER_ID))
 async def add_forcesub(client: Client, message: Message):
     pro = await message.reply("<b><i>Processing....</i></b>", quote=True)
